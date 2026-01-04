@@ -57,6 +57,7 @@ const mihomoConfig = {
 
   // 路由规则
   rules: [
+    'AND,((NETWORK,UDP)),DIRECT',
     'PROCESS-NAME,server.exe,DIRECT',
     'PROCESS-NAME,server,DIRECT',
     'DST-PORT,8866,DIRECT',
