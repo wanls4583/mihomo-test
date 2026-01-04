@@ -97,9 +97,8 @@ electron/view
 
 # leveldb
 *.db
+*.xml
 
 temp
 
 build-info.json
-
-mihomo-config.yaml

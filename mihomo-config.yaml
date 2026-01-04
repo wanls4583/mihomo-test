@@ -1,0 +1,40 @@
+mode: rule
+ipv6: false
+mixed-port: 7890
+allow-lan: true
+log-level: info
+external-controller: 127.0.0.1:9090
+tun:
+  enable: true
+  stack: system
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+  skip-proxy-address-whitelist:
+    - 127.0.0.1/32
+    - ::1/128
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+proxies:
+  - name: Forward-Proxy
+    type: http
+    server: 127.0.0.1
+    port: 8866
+proxy-groups:
+  - name: Default
+    type: select
+    proxies:
+      - Forward-Proxy
+      - DIRECT
+rules:
+  - AND,((NETWORK,UDP)),DIRECT
+  - PROCESS-NAME,server.exe,DIRECT
+  - PROCESS-NAME,server,DIRECT
+  - DST-PORT,8866,DIRECT
+  - MATCH,Default
