@@ -4,9 +4,9 @@ const path = require('path');
 const YAML = require('yaml');
 
 // --- 配置区 ---
-const MIHOMO_BIN = './mihomo'; // Mihomo 二进制文件路径
+const MIHOMO_BIN = './mihomo-mac-x64'; // Mihomo 二进制文件路径
 const TARGET_PROXY = { host: '127.0.0.1', port: 8866 };
-const CONFIG_PATH = path.join(__dirname, 'config.yaml');
+const CONFIG_PATH = path.join(__dirname, 'mihomo-config.yaml');
 
 // 1. 定义 Mihomo (Clash Meta) 配置对象
 const mihomoConfig = {
@@ -58,7 +58,8 @@ const mihomoConfig = {
   // 路由规则
   rules: [
     'PROCESS-NAME,server.exe,DIRECT',
-    // 'DST-PORT,8866,DIRECT',
+    'PROCESS-NAME,server,DIRECT',
+    'DST-PORT,8866,DIRECT',
     // 'SRC-PORT,8866,DIRECT', // 无效，代理服务器发起请求时，端口号是随机的
     // 其余流量全部走代理
     'MATCH,Default'
